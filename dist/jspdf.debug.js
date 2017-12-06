@@ -129,8 +129,8 @@ var asyncGenerator = function () {
 
 /** @preserve
  * jsPDF - PDF Document creation from JavaScript
- * Version 1.3.5 Built on 2017-09-14T19:42:39.720Z
- *                           CommitID 0ae66099f9
+ * Version 1.3.5 Built on 2017-12-06T14:43:39.430Z
+ *                           CommitID 4e224d8bb2
  *
  * Copyright (c) 2010-2016 James Hall <james@parall.ax>, https://github.com/MrRio/jsPDF
  *               2010 Aaron Spike, https://github.com/acspike
@@ -3965,6 +3965,11 @@ AcroForm.internal.setBitPosition = function (variable, position, value) {
 
 	jsPDFAPI.addHTML = function (element, x, y, options, callback) {
 		'use strict';
+		// Allows user to pass through a lib via imported methods
+		// as opposed to the old global var method
+
+		if (options.lib) html2canvas = lib;
+		if (options.lib) rasterizeHTML = lib;
 
 		if (typeof html2canvas === 'undefined' && typeof rasterizeHTML === 'undefined') throw new Error('You need either ' + 'https://github.com/niklasvh/html2canvas' + ' or https://github.com/cburgmer/rasterizeHTML.js');
 
@@ -7726,7 +7731,7 @@ AcroForm.internal.setBitPosition = function (variable, position, value) {
 			this.pdf.internal.write("ET", "Q");
 			this.pdf.addPage();
 			this.y = this.pdf.margins_doc.top;
-			this.pdf.internal.write("q", "BT 0 g", this.pdf.internal.getCoordinateString(this.x), this.pdf.internal.getVerticalCoordinateString(this.y), style.color, "Td");
+			this.pdf.internal.write("q", "BT", this.getPdfColor(style.color), this.pdf.internal.getCoordinateString(this.x), this.pdf.internal.getVerticalCoordinateString(this.y), "Td");
 			//move cursor by one line on new page
 			maxLineHeight = Math.max(maxLineHeight, style["line-height"], style["font-size"]);
 			this.pdf.internal.write(0, (-1 * defaultFontSize * maxLineHeight).toFixed(2), "Td");

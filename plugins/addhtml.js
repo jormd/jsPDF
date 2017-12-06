@@ -30,6 +30,10 @@
 	 */
 	jsPDFAPI.addHTML = function (element, x, y, options, callback) {
 		'use strict';
+		// Allows user to pass through a lib via imported methods
+		// as opposed to the old global var method
+		if (options.lib) html2canvas = lib
+		if (options.lib) rasterizeHTML = lib
 
 		if(typeof html2canvas === 'undefined' && typeof rasterizeHTML === 'undefined')
 			throw new Error('You need either '
