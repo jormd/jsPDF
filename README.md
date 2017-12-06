@@ -1,3 +1,5 @@
+## This package is a slight variant on jsPDF. All I've added is the ability to pass through a library (either rasterizeHTML or html2canvas) to the addHTML function. Previously the libs had to be in the global namespace.
+
 # jsPDF
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/MrRio/jsPDF.svg)](https://greenkeeper.io/)
