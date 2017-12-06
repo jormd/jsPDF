@@ -8,7 +8,7 @@
 
 (function (jsPDFAPI) {
 	'use strict';
-
+	
 	/**
 	 * Renders an HTML element to canvas object which added to the PDF
 	 *
@@ -30,10 +30,7 @@
 	 */
 	jsPDFAPI.addHTML = function (element, x, y, options, callback) {
 		'use strict';
-		// Allows user to pass through a lib via imported methods
-		// as opposed to the old global var method
-		if (options.lib) html2canvas = lib
-		if (options.lib) rasterizeHTML = lib
+		import html2canvas from 'html2canvas'
 
 		if(typeof html2canvas === 'undefined' && typeof rasterizeHTML === 'undefined')
 			throw new Error('You need either '
